@@ -49,8 +49,20 @@ def identify_most_common_word(text: str) -> str:
     Identify the most common word in the text.
     Returns a string. Edge case: if empty string, return None.
     """
-    # TODO: implement using Counter from collections
-    return None
+    # Handle edge case: empty or invalid input
+    if not isinstance(text, str) or not text.strip():
+        return None
+
+    # Normalize text to lowercase, strip punctuation
+    words = re.findall(r"\b\w+\b", text.lower())
+
+    if not words:
+        return None
+
+    # Use Counter to find most common word
+    counter = Counter(words)
+    most_common_word, _ = counter.most_common(1)[0]
+    return most_common_word
 
 
 # -----------------------------
