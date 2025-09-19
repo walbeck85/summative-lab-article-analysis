@@ -120,9 +120,19 @@ def count_sentences(text: str) -> int:
     Sentences are defined by ., !, or ? marks.
     Edge case: empty string should return 1.
     """
-    # TODO: split using regex
-    return 0
+    # Handle edge case: empty or invalid input
+    if not isinstance(text, str):
+        return 1
+    if not text.strip():
+        return 1
 
+    # Split sentences on ., !, or ? using regex after stripping whitespace
+    sentences = re.split(r'[.!?]+', text.strip())
+
+    # Filter out empty results
+    sentences = [s for s in sentences if s.strip()]
+
+    return len(sentences) if sentences else 1
 
 # -----------------------------
 # MAIN SCRIPT
