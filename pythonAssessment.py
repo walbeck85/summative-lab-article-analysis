@@ -73,8 +73,21 @@ def calculate_average_word_length(text: str) -> float:
     Calculate average word length, excluding punctuation.
     Returns a float. Edge case: if empty string, return 0.
     """
-    # TODO: strip punctuation, then calculate average
-    return 0.0
+    # Handle edge case: empty or invalid input
+    if not isinstance(text, str) or not text.strip():
+        return 0.0
+
+    # Extract words (alphanumeric sequences), exclude punctuation
+    words = re.findall(r"\b\w+\b", text)
+
+    if not words:
+        return 0.0
+
+    # Calculate total length of words
+    total_length = sum(len(word) for word in words)
+    average = total_length / len(words)
+
+    return float(average)
 
 
 # -----------------------------
