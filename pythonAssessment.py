@@ -99,8 +99,16 @@ def count_paragraphs(text: str) -> int:
     Paragraphs are defined by blank lines between blocks.
     Edge case: empty string should return 1.
     """
-    # TODO: split on '\n\n'
-    return 0
+    # Handle edge case: empty or invalid input
+    if not isinstance(text, str):
+        return 1
+    if not text.strip():
+        return 1
+
+    # Split text into paragraphs by two or more newlines
+    paragraphs = [p for p in text.split("\n\n") if p.strip()]
+
+    return len(paragraphs) if paragraphs else 1
 
 
 # -----------------------------
